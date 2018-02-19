@@ -1,0 +1,42 @@
+#!/bin/bash
+
+#bash script which will perform a full text + date search on a given list of EPrints repository URLs
+
+#specify repo URLs
+urls=(
+https://eprints.soton.ac.uk/
+)
+
+#start and end date parameters
+start_date="2000"
+end_date="2018-01"
+
+#search term
+term="GitHub"
+
+#search string with parameters
+search="cgi/search/archive/advanced?output=XML&_action_export_redir=Export&screen=Search&dataset=archive&exp=0%7C1%7C-date%7Carchive%7C-%7Cdate%3Adate%3AALL%3AEQ%3A"$start_date"-"$end_date"%7Cdocuments%3Adocuments%3AALL%3AIN%3A"$term"%7C-%7Ceprint_status%3Aeprint_status%3AANY%3AEQ%3Aarchive%7Cmetadata_visibility%3Ametadata_visibility%3AANY%3AEQ%3Ashow"
+
+#regular expression to check the url
+re="https?://([^/]+)/"
+
+#loop through the URLs
+for i in "${urls[@]}"
+do
+	if [[ $i =~ $re ]]; #matches the regex
+        then
+		cache="./cache/"${BASH_REMATCH[1]}".xml" #create location to store results
+		export_url=$i$search #create export URL from repo URL and search parameteres	
+
+		#retrieve the contents of the export
+		wget -q -P ./ $export_url -O $cache.tmp
+		mv $cache.tmp $cache
+
+		#reassure user progress is being made
+		echo "Processed: "$i
+	fi
+done
+
+exit 0
+
+
