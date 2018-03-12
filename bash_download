@@ -1,0 +1,33 @@
+#!/bin/bash
+./eprints_download.pl http://publications.aston.ac.uk/ &
+./eprints_download.pl http://eprints.cardiff.ac.uk/ &
+./eprints_download.pl http://create.canterbury.ac.uk/ &
+./eprints_download.pl http://clok.uclan.ac.uk/ &
+./eprints_download.pl http://openaccess.city.ac.uk/ &
+./eprints_download.pl https://eprints.soton.ac.uk/ &
+./eprints_download.pl http://repository.falmouth.ac.uk/ &
+./eprints_download.pl http://irep.ntu.ac.uk/ &
+./eprints_download.pl http://eprints.keele.ac.uk/ &
+./eprints_download.pl http://kar.kent.ac.uk/ &
+./eprints_download.pl http://eprints.kingston.ac.uk/ &
+./eprints_download.pl http://researchonline.ljmu.ac.uk/ &
+./eprints_download.pl http://eprints.mdx.ac.uk/ &
+./eprints_download.pl http://eprints.nottingham.ac.uk/ &
+./eprints_download.pl http://ray.yorksj.ac.uk/ &
+./eprints_download.pl http://researchspace.bathspa.ac.uk/ &
+./eprints_download.pl http://roar.uel.ac.uk/ &
+./eprints_download.pl http://shura.shu.ac.uk/ &
+./eprints_download.pl http://sure.sunderland.ac.uk/ &
+./eprints_download.pl http://epubs.surrey.ac.uk/ &
+./eprints_download.pl http://sro.sussex.ac.uk/ &
+./eprints_download.pl http://uir.ulster.ac.uk/ &
+./eprints_download.pl https://eprints.glos.ac.uk/ &
+./eprints_download.pl http://eprints.hud.ac.uk/ &
+./eprints_download.pl http://eprints.lincoln.ac.uk/ &
+./eprints_download.pl http://usir.salford.ac.uk/ &
+./eprints_download.pl https://strathprints.strath.ac.uk/ &
+./eprints_download.pl http://eprints.worc.ac.uk/ &
+./eprints_download.pl http://wrap.warwick.ac.uk/ &
+./eprints_download.pl http://eprints.whiterose.ac.uk/ &
+wait
+echo "Done!!!"

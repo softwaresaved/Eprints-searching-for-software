@@ -16,7 +16,7 @@ my @repositories = (
 #"http://centaur.reading.ac.uk/",
 "http://clok.uclan.ac.uk/",
 "http://openaccess.city.ac.uk/",
-"http://dro.dur.ac.uk/",
+#"http://dro.dur.ac.uk/",
 "https://eprints.soton.ac.uk/",
 #"http://www.e-space.mmu.ac.uk/",
 #"http://repository.edgehill.ac.uk/",
@@ -29,8 +29,6 @@ my @repositories = (
 #"http://eprints.lancs.ac.uk/",
 "http://researchonline.ljmu.ac.uk/",
 "http://eprints.mdx.ac.uk/",
-"http://researchonline.ljmu.ac.uk/",
-#"http://eprints.mdx.ac.uk/",
 "http://eprints.nottingham.ac.uk/",
 "http://ray.yorksj.ac.uk/",
 "http://researchspace.bathspa.ac.uk/",
@@ -55,17 +53,54 @@ my @repositories = (
 );
 
 my @terms = (
-"software",
-"program",
+"algorithm",
+"beautifulsoup",
+"code",
+"computation",
 "computational",
-"HPC",
-"simulation",
-"modelling",
-"visualisation",
-"Python",
-"Matlab",
-"Excel",
+"computed",
+"computer",
+"database",
+"excel",
+"fortran",
+"gis",
+"git",
 "github",
+"graphics",
+"hpc",
+"imagej",
+"matlab",
+"matplotlib",
+"model",
+"modeling",
+"modelling",
+"numpy",
+"nvivo",
+"open-source",
+"pipeline",
+"python",
+"quantitative",
+"regression",
+"scrapy",
+"scipy",
+"simulated",
+"simulation",
+"software",
+"spss",
+"sqlalchemy",
+"stata",
+"statistical",
+"supercomputing",
+"visualisation",
+"visualization",
+"Rcpp",
+"ggplot2",
+"plyr",
+"stringr",
+"reshape2",
+"RColorBrewer",
+"workflow",
+"wxpython",
 );
 
 #loop through all the repositories
@@ -78,11 +113,11 @@ foreach my $repo( @repositories )
 
 	#generate CSV output
 	#prepare file
-	my $output = './crossreferencing/' . $repo_url . '_crossref.csv';
+	my $output = './crossreferencing_public/' . $repo_url . '_crossref.csv';
 	open(my $fh, '>', $output) or die "Could not open file '$output' $!";
 
 	#print header row
-	my @headers = ( "EPrint ID" );
+	my @headers = ( "EPrint ID", "URL" );
 	push @headers, @terms;
 	push @headers, "Total";
 	print $fh join( ',', @headers ). "\n";
@@ -91,7 +126,7 @@ foreach my $repo( @repositories )
 	my %eprintids;
 
 	#read all the xml files in the cache
-	my $dir = './cache';
+	my $dir = './cache_all';
 
 	#for each term
 	foreach my $term( @terms ) #loop through each term
@@ -99,7 +134,7 @@ foreach my $repo( @repositories )
 		print STDERR "term....\n";
 
 		#get the XML
-		my $file = "$dir/$repo_url"."_".$term.".xml"; #get the XML
+		my $file = "$dir/$repo_url"."/".$term.".xml"; #get the XML
 
 		if( -e $file ) #if XML exists
 		{
@@ -114,12 +149,24 @@ foreach my $repo( @repositories )
 				$xpc->registerNs('xmlns', 'http://eprints.org/ep2/data/2.0');
 				foreach my $eprint ( @{$xpc->findnodes( '/xmlns:eprints/xmlns:eprint', $dom )} ) #loop through all the eprints
 				{	
-					my $type = $xpc->find('./xmlns:type', $eprint); 
-					if ($type eq "article" || $type eq "conference_item" ) #we're only interested in articles and conference items
+					my $type = $xpc->find('./xmlns:type', $eprint);
+					my $full_text_status = $xpc->find('./xmlns:full_text_status', $eprint);
+					if( ( $type eq "article" || $type eq "conference_item" ) && $full_text_status eq "public" ) #we're only interested in articles and conference items
 					{
 						#get the eprint id
 						my $id = $xpc->find('./xmlns:eprintid', $eprint);
 						$eprintids{$id}{$term} = 1;
+
+						#get the url of the main document
+						foreach my $doc ( @{$xpc->findnodes( './xmlns:documents/xmlns:document', $eprint )} )
+						{
+							my $pos = $xpc->find('./xmlns:pos', $doc );
+							if( $pos eq "1" )
+							{
+								my $url = $xpc->find('./xmlns:main', $doc);
+								$eprintids{$id}{url} = "$repo/$id/1/$url" unless defined $eprintids{$id}{url};								
+							}
+						}
 					}
 				}
 			}
@@ -129,7 +176,7 @@ foreach my $repo( @repositories )
 	#print the results, a line for each eprint
 	foreach my $eprintid (keys %eprintids)
 	{ 
-		my @row = ($eprintid);
+		my @row = ($eprintid, escape_value( $eprintids{$eprintid}{url} ) );
 		my $count = 0; #count how many terms appear for the eprint
 		foreach my $term( @terms )
 		{
@@ -146,3 +193,28 @@ foreach my $repo( @repositories )
 }
 print STDERR "done!!!\n";
 
+sub escape_value
+{
+        my( $value ) = @_;
+
+        return '""' unless( defined $value );
+
+        # strips any kind of double-quotes:
+        $value =~ s/\x93|\x94|"/'/g;
+        # and control-characters
+        $value =~ s/\n|\r|\t//g;
+
+        # if value is a pure number, then add ="$value" so that Excel stops the auto-formatting (it'd turn 123456 into 1.23e+6)
+        if( $value =~ /^[0-9\-]+$/ )
+        {
+                return "=\"$value\"";
+        }
+
+        # only escapes row with spaces and commas
+         if( $value =~ /,| / )
+        {
+                return "\"$value\"";
+        }
+
+        return $value;
+}

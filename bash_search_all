@@ -1,0 +1,32 @@
+#!/bin/bash
+#./search_all_terms http://publications.aston.ac.uk/ &
+#./search_all_terms http://eprints.cardiff.ac.uk/ &
+#./search_all_terms http://create.canterbury.ac.uk/ &
+#./search_all_terms http://clok.uclan.ac.uk/ &
+#./search_all_terms http://openaccess.city.ac.uk/ &
+#./search_all_terms https://eprints.soton.ac.uk/ &
+#./search_all_terms http://repository.falmouth.ac.uk/ &
+#./search_all_terms http://irep.ntu.ac.uk/ &
+#./search_all_terms http://eprints.keele.ac.uk/ &
+#./search_all_terms http://kar.kent.ac.uk/ &
+#./search_all_terms http://eprints.kingston.ac.uk/ &
+#./search_all_terms http://researchonline.ljmu.ac.uk/ &
+#./search_all_terms http://eprints.mdx.ac.uk/ &
+#./search_all_terms http://eprints.nottingham.ac.uk/ &
+#./search_all_terms http://ray.yorksj.ac.uk/ &
+#./search_all_terms http://researchspace.bathspa.ac.uk/ &
+#./search_all_terms http://roar.uel.ac.uk/ &
+#./search_all_terms http://shura.shu.ac.uk/ &
+#./search_all_terms http://sure.sunderland.ac.uk/ &
+#./search_all_terms http://epubs.surrey.ac.uk/ &
+./search_all_terms http://sro.sussex.ac.uk/ &
+#./search_all_terms http://uir.ulster.ac.uk/ &
+#./search_all_terms https://eprints.glos.ac.uk/ &
+#./search_all_terms http://eprints.lincoln.ac.uk/ &
+#./search_all_terms http://usir.salford.ac.uk/ &
+#./search_all_terms https://strathprints.strath.ac.uk/ &
+#./search_all_terms http://eprints.worc.ac.uk/ &
+#./search_all_terms http://wrap.warwick.ac.uk/ &
+#./search_all_terms http://eprints.whiterose.ac.uk/ &
+wait
+echo "Done!!!"
