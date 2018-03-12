@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-#Perl script for converting XML results from the OpenDOAR API (http://www.opendoar.org/tools/api.html) into a CSV - Will Fyson (2018)
+#Perl script for finding unique EPrint IDs and URLs to documents along with a flag indictaing if a particular search term appears at least once in the document - Will Fyson (2018)
 
 use lib '/root/perl5/lib/perl5';
 use XML::Simple;
