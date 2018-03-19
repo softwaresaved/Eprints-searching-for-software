@@ -76,7 +76,6 @@ my @terms = (
 "modelling",
 "numpy",
 "nvivo",
-"open-source",
 "pipeline",
 "python",
 "quantitative",

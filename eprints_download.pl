@@ -43,13 +43,17 @@ foreach my $repo( @repositories )
 			#save pdf according to eprintid
 			my $filepath = "./pdfs/$repo_url/$eprintid.pdf";
 		
-			#perform wget
-			my $wget = "wget -q -P ./ $url -O $filepath";
-			system $wget;
+			#only get if we don't have the file already
+			if( ! -e $filepath )
+			{
+				#perform wget
+				my $wget = "wget -q -P ./ '$url' -O $filepath";
+				system $wget;
 
-			#wait some time before getting the next PDF so as not to concern the server
-			my $sleep = 5 + int(rand(10 - 5));
-			sleep $sleep;
+				#wait some time before getting the next PDF so as not to concern the server
+				my $sleep = 5 + int(rand(10 - 5));
+				sleep $sleep;
+			}
 		}
 	}
 }
