@@ -30,9 +30,6 @@ XML_EXTRACT_FIELDS = {
     'date': 'ep:date',
 }
 
-# Years that the Institute has existed, except 2018
-SUBSET_YEARS = [2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017]
-
 
 def import_csv_to_df(filename):
     """
@@ -85,7 +82,7 @@ def export_to_csv(df, filename, compress=False):
             targz.add(filename + '.csv')
 
 
-def build_metadata_dataframe():
+def build_metadata_dataframe(repo_info):
 
     df = pd.DataFrame(columns=list(XML_EXTRACT_FIELDS.keys()))
 
@@ -93,6 +90,7 @@ def build_metadata_dataframe():
     # analysing each search term file of positive
     # record matches, and extract metadata into our
     # summary dataframe
+    # TODO: base repo list on INPUT_REPOINFO_FILE URL column
     for repo_dir in os.listdir(INPUT_XMLDATA_DIR):
         print('Processing ' + repo_dir + '...')
 
@@ -140,7 +138,7 @@ def main():
 
     repo_info = import_csv_to_df(INPUT_REPOINFO_FILE)
 
-    df = build_metadata_dataframe()
+    df = build_metadata_dataframe(repo_info)
 
     export_to_csv(df, OUTPUT_FILE_PREFIX, compress=False)
 
