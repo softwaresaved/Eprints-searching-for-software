@@ -1,0 +1,6 @@
+venv/*
+.DS_Store
+final-df.csv
+.data_processing/
+full_texts/
+.idea/

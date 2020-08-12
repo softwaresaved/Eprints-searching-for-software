@@ -1,0 +1,32 @@
+#!/bin/bash
+./bash_scripts/get_schema http://publications.aston.ac.uk/ &
+./bash_scripts/get_schema http://eprints.cardiff.ac.uk/ &
+./bash_scripts/get_schema http://create.canterbury.ac.uk/ &
+./bash_scripts/get_schema http://clok.uclan.ac.uk/ &
+./bash_scripts/get_schema http://openaccess.city.ac.uk/ &
+./bash_scripts/get_schema https://eprints.soton.ac.uk/ &
+./bash_scripts/get_schema http://repository.falmouth.ac.uk/ &
+./bash_scripts/get_schema http://irep.ntu.ac.uk/ &
+./bash_scripts/get_schema http://eprints.keele.ac.uk/ &
+./bash_scripts/get_schema http://kar.kent.ac.uk/ &
+./bash_scripts/get_schema http://eprints.kingston.ac.uk/ &
+./bash_scripts/get_schema http://researchonline.ljmu.ac.uk/ &
+./bash_scripts/get_schema http://eprints.mdx.ac.uk/ &
+./bash_scripts/get_schema http://eprints.nottingham.ac.uk/ &
+./bash_scripts/get_schema http://ray.yorksj.ac.uk/ &
+./bash_scripts/get_schema http://researchspace.bathspa.ac.uk/ &
+./bash_scripts/get_schema http://roar.uel.ac.uk/ &
+./bash_scripts/get_schema http://shura.shu.ac.uk/ &
+./bash_scripts/get_schema http://sure.sunderland.ac.uk/ &
+./bash_scripts/get_schema http://epubs.surrey.ac.uk/ &
+./bash_scripts/get_schema http://sro.sussex.ac.uk/ &
+./bash_scripts/get_schema http://uir.ulster.ac.uk/ &
+./bash_scripts/get_schema ttps://eprints.glos.ac.uk/ &
+./bash_scripts/get_schema http://eprints.lincoln.ac.uk/ &
+./bash_scripts/get_schema http://usir.salford.ac.uk/ &
+./bash_scripts/get_schema https://strathprints.strath.ac.uk/ &
+./bash_scripts/get_schema http://eprints.worc.ac.uk/ &
+./bash_scripts/get_schema http://wrap.warwick.ac.uk/ &
+./bash_scripts/get_schema http://eprints.whiterose.ac.uk/ &
+wait
+echo "Done!!!"

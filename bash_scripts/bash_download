@@ -1,0 +1,33 @@
+#!/bin/bash
+./perl_scripts/eprints_download.pl http://publications.aston.ac.uk/ &
+./perl_scripts/eprints_download.pl http://eprints.cardiff.ac.uk/ &
+./perl_scripts/eprints_download.pl http://create.canterbury.ac.uk/ &
+./perl_scripts/eprints_download.pl http://clok.uclan.ac.uk/ &
+./perl_scripts/eprints_download.pl http://openaccess.city.ac.uk/ &
+./perl_scripts/eprints_download.pl https://eprints.soton.ac.uk/ &
+./perl_scripts/eprints_download.pl http://repository.falmouth.ac.uk/ &
+./perl_scripts/eprints_download.pl http://irep.ntu.ac.uk/ &
+./perl_scripts/eprints_download.pl http://eprints.keele.ac.uk/ &
+./perl_scripts/eprints_download.pl http://kar.kent.ac.uk/ &
+./perl_scripts/eprints_download.pl http://eprints.kingston.ac.uk/ &
+./perl_scripts/eprints_download.pl http://researchonline.ljmu.ac.uk/ &
+./perl_scripts/eprints_download.pl http://eprints.mdx.ac.uk/ &
+./perl_scripts/eprints_download.pl http://eprints.nottingham.ac.uk/ &
+./perl_scripts/eprints_download.pl http://ray.yorksj.ac.uk/ &
+./perl_scripts/eprints_download.pl http://researchspace.bathspa.ac.uk/ &
+./perl_scripts/eprints_download.pl http://roar.uel.ac.uk/ &
+./perl_scripts/eprints_download.pl http://shura.shu.ac.uk/ &
+./perl_scripts/eprints_download.pl http://sure.sunderland.ac.uk/ &
+./perl_scripts/eprints_download.pl http://epubs.surrey.ac.uk/ &
+./perl_scripts/eprints_download.pl http://sro.sussex.ac.uk/ &
+./perl_scripts/eprints_download.pl http://uir.ulster.ac.uk/ &
+./perl_scripts/eprints_download.pl https://eprints.glos.ac.uk/ &
+./perl_scripts/eprints_download.pl http://eprints.hud.ac.uk/ &
+./perl_scripts/eprints_download.pl http://eprints.lincoln.ac.uk/ &
+./perl_scripts/eprints_download.pl http://usir.salford.ac.uk/ &
+./perl_scripts/eprints_download.pl https://strathprints.strath.ac.uk/ &
+./perl_scripts/eprints_download.pl http://eprints.worc.ac.uk/ &
+./perl_scripts/eprints_download.pl http://wrap.warwick.ac.uk/ &
+./perl_scripts/eprints_download.pl http://eprints.whiterose.ac.uk/ &
+wait
+echo "Done!!!"

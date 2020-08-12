@@ -1,0 +1,92 @@
+#!/bin/bash
+
+#bash script which will perform a full text + date search on a given list of EPrints repository URLs
+
+#specify repo URLs
+urls=(
+http://publications.aston.ac.uk/
+http://eprints.cardiff.ac.uk/
+http://create.canterbury.ac.uk/
+http://clok.uclan.ac.uk/
+http://openaccess.city.ac.uk/
+https://eprints.soton.ac.uk/
+http://repository.falmouth.ac.uk/
+http://irep.ntu.ac.uk/
+http://eprints.keele.ac.uk/
+http://kar.kent.ac.uk/
+http://eprints.kingston.ac.uk/
+http://researchonline.ljmu.ac.uk/
+http://eprints.mdx.ac.uk/
+http://researchonline.ljmu.ac.uk/
+http://eprints.nottingham.ac.uk/
+http://ray.yorksj.ac.uk/
+http://researchspace.bathspa.ac.uk/
+http://roar.uel.ac.uk/
+http://shura.shu.ac.uk/
+http://sure.sunderland.ac.uk/
+http://epubs.surrey.ac.uk/
+http://sro.sussex.ac.uk/
+http://uir.ulster.ac.uk/
+https://eprints.glos.ac.uk/
+http://eprints.hud.ac.uk/
+http://eprints.lincoln.ac.uk/
+http://usir.salford.ac.uk/
+https://strathprints.strath.ac.uk/
+http://eprints.worc.ac.uk/
+http://wrap.warwick.ac.uk/
+http://eprints.whiterose.ac.uk/
+)
+
+#start and end date parameters
+#start_date="2000"
+#end_date="2018-01"
+
+#search term
+terms=(
+github
+software
+program
+computational
+HPC
+simulation
+modelling
+visualisation
+Python
+Matlab
+Excel
+)
+
+#regular expression to check the url
+re="https?://([^/]+)/"
+
+for t in "${terms[@]}"
+do
+
+	#loop through the URLs
+	for i in "${urls[@]}"
+	do
+		if [[ $i =~ $re ]]; #matches the regex
+		then
+	
+			#search string with parameters
+			search="cgi/search/advanced?output=XML&_action_export_redir=Export&screen=Search&dataset=archive&exp=0%7C1%7C-date%7Carchive%7C-%7Cdocuments%3Adocuments%3AALL%3AIN%3A"$t"%7C-%7Ceprint_status%3Aeprint_status%3AANY%3AEQ%3Aarchive%7Cmetadata_visibility%3Ametadata_visibility%3AANY%3AEQ%3Ashow"
+      cache="./.data_processing/cache/"${BASH_REMATCH[1]}"_"$t".xml" #create location to store results
+			export_url=$i$search #create export URL from repo URL and search parameteres	
+
+			echo $export_url
+
+			#retrieve the contents of the export
+			wget -q -P ./ $export_url -O $cache &
+			#mv $cache.tmp $cache
+
+			#reassure user progress is being made
+			echo "Processing: "$i
+		fi
+	done
+	wait
+	echo "Processed: "$t
+done
+
+exit 0
+
+

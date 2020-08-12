@@ -1,0 +1,32 @@
+#!/bin/bash
+./bash_scripts/search_all_terms http://publications.aston.ac.uk/ &
+./bash_scripts/search_all_terms http://eprints.cardiff.ac.uk/ &
+./bash_scripts/search_all_terms http://create.canterbury.ac.uk/ &
+./bash_scripts/search_all_terms http://clok.uclan.ac.uk/ &
+./bash_scripts/search_all_terms http://openaccess.city.ac.uk/ &
+./bash_scripts/search_all_terms https://eprints.soton.ac.uk/ &
+./bash_scripts/search_all_terms http://repository.falmouth.ac.uk/ &
+./bash_scripts/search_all_terms http://irep.ntu.ac.uk/ &
+./bash_scripts/search_all_terms http://eprints.keele.ac.uk/ &
+./bash_scripts/search_all_terms http://kar.kent.ac.uk/ &
+./bash_scripts/search_all_terms http://eprints.kingston.ac.uk/ &
+./bash_scripts/search_all_terms http://researchonline.ljmu.ac.uk/ &
+./bash_scripts/search_all_terms http://eprints.mdx.ac.uk/ &
+./bash_scripts/search_all_terms http://eprints.nottingham.ac.uk/ &
+./bash_scripts/search_all_terms http://ray.yorksj.ac.uk/ &
+./bash_scripts/search_all_terms http://researchspace.bathspa.ac.uk/ &
+./bash_scripts/search_all_terms http://roar.uel.ac.uk/ &
+./bash_scripts/search_all_terms http://shura.shu.ac.uk/ &
+./bash_scripts/search_all_terms http://sure.sunderland.ac.uk/ &
+./bash_scripts/search_all_terms http://epubs.surrey.ac.uk/ &
+./bash_scripts/search_all_terms http://sro.sussex.ac.uk/ &
+./bash_scripts/search_all_terms http://uir.ulster.ac.uk/ &
+./bash_scripts/search_all_terms https://eprints.glos.ac.uk/ &
+./bash_scripts/search_all_terms http://eprints.lincoln.ac.uk/ &
+./bash_scripts/search_all_terms http://usir.salford.ac.uk/ &
+./bash_scripts/search_all_terms https://strathprints.strath.ac.uk/ &
+./bash_scripts/search_all_terms http://eprints.worc.ac.uk/ &
+./bash_scripts/search_all_terms http://wrap.warwick.ac.uk/ &
+./bash_scripts/search_all_terms http://eprints.whiterose.ac.uk/ &
+wait
+echo "Done!!!"

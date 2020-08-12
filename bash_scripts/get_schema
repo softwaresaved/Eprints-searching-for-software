@@ -1,0 +1,39 @@
+#!/bin/bash
+
+#bash script which will perform a full text + date search on a given list of EPrints repository URLs
+
+#specify repo URLs
+urls=(
+$1
+);
+
+
+#regular expression to check the url
+re="https?://([^/]+)/"
+
+#loop through the URLs
+for i in "${urls[@]}"
+do
+	if [[ $i =~ $re ]]; #matches the regex
+	then
+	
+	#schema url
+	cgi="cgi/schema";
+
+	xml="./.data_processing/schema/"${BASH_REMATCH[1]}"_schema.xml" #create location to store results
+	schema_url=$i$cgi #create scehma URL
+
+	echo $schema_url
+
+	#retrieve the scehma
+	wget -q -P ./ $schema_url -O $xml &
+
+	#reassure user progress is being made
+	echo "Processing: "$i
+	fi
+done
+wait
+
+exit 0
+
+
