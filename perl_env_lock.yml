@@ -1,0 +1,46 @@
+name: perl-env
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+  - pypi
+dependencies:
+  - expat=2.4.8=h96cf925_0
+  - icu=70.1=h96cf925_0
+  - libcxx=13.0.1=hc203e6f_0
+  - libiconv=1.16=haf1e3a3_0
+  - libxml2=2.9.14=h08a9926_0
+  - libzlib=1.2.11=h6c3fc93_1014
+  - perl=5.32.1=2_h0d85af4_perl5
+  - perl-alien-build=2.48=pl5321ha5712d3_0
+  - perl-alien-libxml2=0.17=pl5321ha5712d3_0
+  - perl-app-cpanminus=1.7046=pl5321hd8ed1ab_0
+  - perl-capture-tiny=0.48=pl5321hdfd78af_2
+  - perl-carp=1.38=pl5321hdfd78af_4
+  - perl-constant=1.33=pl5321hdfd78af_2
+  - perl-data-dumper=2.183=pl5321ha5712d3_1
+  - perl-exporter=5.72=pl5321hdfd78af_2
+  - perl-extutils-makemaker=7.64=pl5321hd8ed1ab_0
+  - perl-ffi-checklib=0.28=pl5321hdfd78af_0
+  - perl-file-chdir=0.1010=pl5321hdfd78af_3
+  - perl-file-path=2.18=pl5321hd8ed1ab_0
+  - perl-file-temp=0.2304=pl5321hd8ed1ab_0
+  - perl-file-which=1.24=pl5321hd8ed1ab_0
+  - perl-importer=0.026=pl5321hdfd78af_0
+  - perl-parent=0.236=pl5321hdfd78af_2
+  - perl-path-tiny=0.122=pl5321hdfd78af_0
+  - perl-pathtools=3.75=pl5321ha5712d3_3
+  - perl-scope-guard=0.21=pl5321hdfd78af_3
+  - perl-sub-info=0.002=pl5321hdfd78af_1
+  - perl-term-table=0.016=pl5321hdfd78af_0
+  - perl-test2-suite=0.000145=pl5321hdfd78af_0
+  - perl-xml-libxml=2.0207=pl5321h635989b_0
+  - perl-xml-namespacesupport=1.12=pl5321hdfd78af_1
+  - perl-xml-parser=2.44=pl5321h50c80e2_8
+  - perl-xml-sax=1.02=pl5321hdfd78af_1
+  - perl-xml-sax-base=1.09=pl5321hdfd78af_1
+  - perl-xml-sax-expat=0.51=pl5321hdfd78af_4
+  - perl-xml-simple=2.25=pl5321hdfd78af_2
+  - xz=5.2.5=haf1e3a3_1
+  - zlib=1.2.11=h6c3fc93_1014
+prefix: /usr/local/Caskroom/miniconda/base/envs/perl-env
