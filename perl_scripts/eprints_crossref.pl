@@ -2,9 +2,9 @@
 
 #Perl script for finding unique EPrint IDs and URLs to documents along with a flag indictaing if a particular search term appears at least once in the document - Will Fyson (2018)
 
-use lib '/root/perl5/lib/perl5';
+#use lib '/root/perl5/lib/perl5';
 use XML::Simple;
-use XML::Parser::PerlSAX;
+#use XML::Parser::PerlSAX;
 use XML::LibXML;
 use Data::Dumper;
 use strict;

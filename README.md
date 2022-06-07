@@ -76,6 +76,12 @@ Required libraries:
 
     * 'eprints_download.pl' can be called from 'bash_download' to download from all repositories simultaneously.
 
+8. Analysis
+
+    * The ‘generate_analysis_metadata.py’ script takes in the directory of xml files from the 'bash_search_all' Bash script.  From these xml files, the script creates a dataframe of all eprints records that were identified in the database search. The dataframe contains one row per eprints record and one column for each search term as well as columns containing metadata (title, abstract, date, funder).
+
+    * The ‘eprints_analyse.py’ script takes in the dataframe created by ‘generate_analysis_metadata.py’.  From this data the script creates a series of summary tables and graphs which are saved as csv and png files respectively in the analysis_output directory. 
+
 ## Other Useful Details
 
 ### opendoar_to_csv.pl

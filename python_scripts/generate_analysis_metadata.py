@@ -1,22 +1,15 @@
-#!/usr/bin/env python
 # encoding: utf-8
 
 import os
-import math
-import string
-import time
 import tarfile
-
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import urllib.request
+import xml.etree.ElementTree as ET
 
-from xml.etree import cElementTree as et
+#test_repo_subset = ['clok.uclan.ac.uk', 'eprints.glos.ac.uk']
 
+#ensure that there are not any folders in INPUT_XMLDATA_DIR where all xml files are empty
+INPUT_XMLDATA_DIR = './.data_processing/cache_all'
 
-INPUT_REPOINFO_FILE = './.data_processing/term_counts/eprints-repository-overview.csv'
-INPUT_XMLDATA_DIR = '/tmp/eprints-data-xml'
 OUTPUT_FILE_PREFIX = 'final_df'
 
 XMLNS = 'http://eprints.org/ep2/data/2.0'
@@ -31,71 +24,28 @@ XML_EXTRACT_FIELDS = {
 }
 
 
-def import_csv_to_df(filename):
+
+def build_metadata_dataframe(xml_data_directory):
     """
-    Imports a csv file into a Pandas dataframe
-    :params: an xls file and a sheetname from that file
-    :return: a df
+    From a directory of xml files, creates a dataframe of all eprints records.
+    The dataframe contains one row per eprints record and one column for each search term 
+    as well as columns containing metadata (title, abstract, date, funder).
+    :params: xml_data_directory: a directory of folders from each eprints repository,
+    with each folder containing one xml file for each search term
+    :return: a dataframe of metadata for each eprints record and the search terms 
+    in each record
     """
-
-    return pd.read_csv(filename)
-
-
-def retrieve_xml_from_url(filename):
-    """
-    This was copied from Steve Crouch's training set collector repo:
-    https://github.com/softwaresaved/training-set-collector
-
-    It's purpose is to retrieve and return a GtR XML document from a given URL source.
-    """
-
-    # Initialise
-    xml_root = None
-
-    try:
-        # Get xml from file
-        xml_str = urllib.request.urlopen(filename).read()
-
-        # Some returned xml may contain unicode, so need to ensure it's ascii
-        xml_str = xml_str.decode('utf8').encode('ascii', 'replace')
-        # Use Elementtree to extract XML
-        xml_root = et.fromstring(xml_str)
-    # The except part is mainly needed if you're getting the data from the API
-    # rather than dragging it in from a file like we're doing in this program
-    except (urllib.request.HTTPError, urllib.request.URLError) as err:
-        print(filename + ": " + str(err))
-
-    return xml_root
-
-
-def export_to_csv(df, filename, compress=False):
-    """
-    Exports a df to a csv file, optionally compressing it as a .tar.gz file
-    :params: a df and a location in which to save it
-    :return: nothing, saves a csv
-    """
-
-    df.to_csv(filename + '.csv', index=True)
-
-    if compress:
-        with tarfile.open(filename + '.tar.gz', 'w:gz') as targz:
-            targz.add(filename + '.csv')
-
-
-def build_metadata_dataframe(repo_info):
-
     df = pd.DataFrame(columns=list(XML_EXTRACT_FIELDS.keys()))
 
     # Go through each eprints repository directory,
     # analysing each search term file of positive
     # record matches, and extract metadata into our
     # summary dataframe
-    # TODO: base repo list on INPUT_REPOINFO_FILE URL column
-    for repo_dir in os.listdir(INPUT_XMLDATA_DIR):
+    for repo_dir in os.listdir(xml_data_directory):
         print('Processing ' + repo_dir + '...')
 
         # Go through each search term file
-        repo_path = os.path.join(INPUT_XMLDATA_DIR, repo_dir)
+        repo_path = os.path.join(xml_data_directory, repo_dir)
         for term_file in os.listdir(repo_path):
             term_name = os.path.splitext(term_file)[0]
 
@@ -106,7 +56,11 @@ def build_metadata_dataframe(repo_info):
             print('  Analysing ' + term_file + '...')
 
             # Load in the xml term file, and extract all eprints records
-            xml_root = retrieve_xml_from_url('file://' + os.path.join(repo_path, term_file))
+            full_path = os.path.join(repo_path, term_file)
+
+            tree = ET.parse(full_path)
+            xml_root = tree.getroot()
+
             term_all_records = xml_root.findall('ep:eprint', {'ep': XMLNS})
 
             # Go through each record with unique ids, extracting
@@ -133,15 +87,25 @@ def build_metadata_dataframe(repo_info):
 
     return df
 
+def export_to_csv(df, filename, compress=False):
+    """
+    Exports a df to a csv file, optionally compressing it as a .tar.gz file
+    :params: a df and a location in which to save it
+    :return: nothing, saves a csv
+    """
+
+    df.to_csv(filename + '.csv', index=True)
+
+    if compress:
+        with tarfile.open(filename + '.tar.gz', 'w:gz') as targz:
+            targz.add(filename + '.csv')
+
 
 def main():
 
-    repo_info = import_csv_to_df(INPUT_REPOINFO_FILE)
-
-    df = build_metadata_dataframe(repo_info)
+    df = build_metadata_dataframe(INPUT_XMLDATA_DIR)
 
     export_to_csv(df, OUTPUT_FILE_PREFIX, compress=False)
-
 
 
 if __name__ == '__main__':

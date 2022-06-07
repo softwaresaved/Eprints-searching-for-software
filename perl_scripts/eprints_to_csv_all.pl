@@ -1,10 +1,8 @@
-#!/usr/bin/perl -w
-
 #Perl script for converting XML results from the OpenDOAR API (http://www.opendoar.org/tools/api.html) into a CSV - Will Fyson (2018)
 
-use lib '/root/perl5/lib/perl5';
+#use lib '/root/perl5/lib/perl5';
 use XML::Simple;
-use XML::Parser::PerlSAX;
+#use XML::Parser::PerlSAX;
 use XML::LibXML;
 use Data::Dumper;
 use strict;
